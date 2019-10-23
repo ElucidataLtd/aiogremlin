@@ -89,8 +89,24 @@ class ResultSet:
                 raise exception.ResponseTimeoutError('Response timed out')
         return msg
 
+    # Original code
+    # async def all(self):
+    #     results = []
+    #     async for result in self:
+    #         results.append(result)
+    #     return results
+
+    # Replacement
     async def all(self):
         results = []
-        async for result in self:
+        # async for result in self:
+        async for result in self.iter_results():
             results.append(result)
         return results
+
+    async def iter_results(self):
+        while True:
+            msg = await self.one()
+            if not msg:
+                break
+            yield msg

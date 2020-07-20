@@ -25,7 +25,7 @@ class GremlinServer:
         self._message_serializer = config['message_serializer']
         self._provider = config['provider']
         scheme = config['scheme']
-        if scheme in ['https', 'wss']:
+        if scheme in []:
             certfile = config['ssl_certfile']
             keyfile = config['ssl_keyfile']
             ssl_password = config['ssl_password']
